@@ -1,34 +1,43 @@
-Welcome to my Reddit Scraper!
-_(its not the best, **YET**)_
+# Reddit Scraper
 
-This project is a really simple project with three docker instances: MongoDB, Explorer and Processor. Explorer finds the links needed and Processor pulls the .json versions. However, you need to apply these three steps to get going.
+Welcome to my Reddit Scraper!  
+_(It’s not the best, **YET**.)_
 
-1. Setting up the docker-compose.yml
+This is a simple project with three Docker containers: **MongoDB**, **Explorer**, and **Processor**.  
+Explorer finds the links needed, and Processor pulls the `.json` versions.  
+To get started, just follow these three steps:
 
-This project uses docker to run a mongodb instance _(please make sure you installed docker beforehand)_. So you should set its username and password from the docker-compose.yml by editing the lines **9 and 10** like so:
+---
 
-MONGO_INITDB_ROOT_USERNAME: uname_for_mongo #<-- 9th line
-MONGO_INITDB_ROOT_PASSWORD: pass_for_mongo #<-- 10th line
+## 1. Setting up `docker-compose.yml`
 
+This project uses Docker to run a MongoDB instance _(please make sure Docker is installed beforehand)_.  
+Set its username and password by editing **lines 9 and 10** in `docker-compose.yml`, like this:
+
+```yaml
+MONGO_INITDB_ROOT_USERNAME: uname_for_mongo  # <-- line 9
+MONGO_INITDB_ROOT_PASSWORD: pass_for_mongo  # <-- line 10
 2. Setting the .env file
+Create a .env file with the following content.
+Do not change the last two lines:
 
-Add them to the .env file you will create like in the example below, without changing the last two lines:
-
+env
+Kopyala
+Düzenle
 MONGO_USERNAME=admin
 MONGO_PASSWORD=password
 MONGO_HOST=mongodb
 MONGO_PORT=27017
-
 3. You're good to go!
+Run these two commands to start:
 
-You just need to hit these two commands to get going:
-
+bash
 docker-compose up -d --build
 python main.py
+```
 
-4. Happy Scraping!
+4. Happy Scraping! 🎉
+   You are now scraping the happy, dark world of Reddit (≧◡≦)! Have fun!
 
-You are now scraping the happy, dark world of reddit (≧◡≦)! Have fun!
-
-WARNING! This project is still under development, so watch your steps, and make some feedback people!
+⚠️ Warning: This project is still under development — so watch your steps, and please send some feedback!
 Thank you!
