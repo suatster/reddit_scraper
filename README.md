@@ -33,7 +33,7 @@ MONGO_PORT=27017
 3. You're good to go!
    Run these two commands to start:
 
-bash
+```bash
 docker-compose up -d --build
 python main.py
 
@@ -44,4 +44,3 @@ python main.py
 
 ⚠️ Warning: This project is still under development — so watch your steps, and please send some feedback!
 Thank you!
-```
