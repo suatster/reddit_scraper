@@ -20,12 +20,12 @@ MONGO_INITDB_ROOT_PASSWORD: pass_for_mongo # <-- line 10
 ```
 
 2. Setting the .env file  
-   Create a .env file with the following content.  
+   Create a .env file with the same credentials.  
    Do not change the last two lines:
 
 ```yaml
-MONGO_USERNAME=admin
-MONGO_PASSWORD=password
+MONGO_USERNAME=uname_for_mongo
+MONGO_PASSWORD=pass_for_mongo
 MONGO_HOST=mongodb
 MONGO_PORT=27017
 ```
