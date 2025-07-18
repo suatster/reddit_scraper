@@ -19,8 +19,8 @@ MONGO_INITDB_ROOT_USERNAME: uname_for_mongo # <-- line 9
 MONGO_INITDB_ROOT_PASSWORD: pass_for_mongo # <-- line 10
 ```
 
-2. Setting the .env file
-   Create a .env file with the following content.
+2. Setting the .env file  
+   Create a .env file with the following content.  
    Do not change the last two lines:
 
 ```yaml
@@ -30,7 +30,7 @@ MONGO_HOST=mongodb
 MONGO_PORT=27017
 ```
 
-3. You're good to go!
+3. You're good to go!  
    Run these two commands to start:
 
 ```bash
@@ -39,8 +39,8 @@ python main.py
 
 ```
 
-4. Happy Scraping! 🎉
+4. Happy Scraping! 🎉  
    You are now scraping the happy, dark world of Reddit (≧◡≦)! Have fun!
 
-⚠️ Warning: This project is still under development — so watch your steps, and please send some feedback!
+⚠️ Warning: This project is still under development — so watch your steps, and please send some feedback!  
 Thank you!
