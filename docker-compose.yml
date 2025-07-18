@@ -6,8 +6,8 @@ services:
     ports:
       - "27017:27017"
     environment:
-      MONGO_INITDB_ROOT_USERNAME: uname_for_mongo
-      MONGO_INITDB_ROOT_PASSWORD: pass_for_mongo
+      MONGO_INITDB_ROOT_USERNAME: changeme
+      MONGO_INITDB_ROOT_PASSWORD: changeme
     volumes:
       - mongodb_data:/data/db
       - ./mongo-init:/docker-entrypoint-initdb.d

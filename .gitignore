@@ -1,6 +1,7 @@
-#example gitignore file, more than enough for our project
-# Ignore environment variables
-.env
+#example gitignore file, more than enough for our project.
+
+# Did NOT ignore the .env file, as it has no personal information. 
+# It only contains uname and password for the "Docker's" MongoDB instance.
 
 # Ignore logs
 *.log
@@ -14,8 +15,6 @@ __pycache__/
 # Ignore VSCode settings
 .vscode/
 
-# Ignore Docker ignore file (optional)
-.dockerignore
 
 # Ignore virtual environments (if any)
 venv/

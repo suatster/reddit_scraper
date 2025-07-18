@@ -78,6 +78,8 @@ def main():
         logging.info("Process interrupted by user. Exiting gracefully...")
     except Exception as e:
         logging.error(f"An unexpected error occurred: {e}")
+    finally:
+        logging.info("Orchestrator script finished execution.")
 
 if __name__ == "__main__":
     main()
