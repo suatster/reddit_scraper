@@ -1,0 +1,40 @@
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: reddit_scraper_db
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: uname_for_mongo
+      MONGO_INITDB_ROOT_PASSWORD: pass_for_mongo
+    volumes:
+      - mongodb_data:/data/db
+      - ./mongo-init:/docker-entrypoint-initdb.d
+  reddit_scraper_explorer:
+    build: ./explorer
+    container_name: reddit_scraper_explorer
+    stdin_open: true #allow input
+    tty: true #"assign" a terminal
+    depends_on:
+      - mongodb
+      - reddit_scraper_processor
+    volumes:
+      - ./data:/app/data
+    env_file:
+      - .env
+  reddit_scraper_processor:
+    build: ./processor
+    container_name: reddit_scraper_processor
+    stdin_open: true #allow input
+    tty: true #"assign" a terminal
+    depends_on:
+      - mongodb
+    volumes:
+      - ./data:/app/data
+    env_file:
+      - .env
+    command: python processor/process_main.py
+
+volumes:
+  mongodb_data:

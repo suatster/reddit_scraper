@@ -1,0 +1,32 @@
+#example gitignore file, more than enough for our project
+# Ignore environment variables
+.env
+
+# Ignore logs
+*.log
+orchestrator_log.txt
+
+# Ignore Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Ignore VSCode settings
+.vscode/
+
+# Ignore Docker ignore file (optional)
+.dockerignore
+
+# Ignore virtual environments (if any)
+venv/
+env/
+.env/
+
+# Ignore compiled files and system files
+*.DS_Store
+*.swp
+Thumbs.db
+
+# Ignore Python egg files
+*.egg-info/
+*.egg
