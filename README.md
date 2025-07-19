@@ -33,11 +33,19 @@ MONGO_PORT=27017
 
 ## 3. You're good to go!
 
-Run these two commands to start:
+Run these two commands to start with gui:
 
 ```bash
 docker-compose up -d --build
 python main.py
+
+```
+
+You can also use arguments to launch without ui:
+
+```bash
+docker-compose up -d --build
+python main.py {--noui [arguments: (-s or --search and -n or --number) or (-u or --url)]} or {--ui}
 
 ```
 
