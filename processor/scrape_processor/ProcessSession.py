@@ -12,6 +12,8 @@ class ProcessSession:
         """Initialize the ProcessSession with MongoDB client and collection."""
         self.mongo_client = None
         self.database = None
+        self.src_collection = None
+        self.target = None # To add the numbers of posts processed
         self.setup_resource()
         
     def setup_resource(self):
@@ -59,7 +61,7 @@ class ProcessSession:
             target_collection.update_one(
                 {"title": content['title'], "author": content['author']},
                 {"$set": content}
-            )
+            )   
         else:
             logging.info(f"Inserting new content into {save_to}.")
             target_collection.insert_one(content)
@@ -82,26 +84,43 @@ class ProcessSession:
         except Exception as e:
             logging.error(f"Error processing JSON content: {e}")
     
+    def update_number(self, collection_name):
+        collection = self.database[collection_name]
+        total = collection.count_documents({})
+
+        for index, doc in enumerate(collection.find().sort("_id"), start=1):
+            value = f"{index}/{total}"
+            collection.update_one(
+                {"_id": doc["_id"]},
+                {"$set": {"number": value}}
+            )
+            logging.debug(f"Updated 'number' in doc {doc['_id']} to {value}")
+        
+        logging.info(f"Updated 'number' for all documents in '{collection_name}'")
+        
     def constantly_process(self):
         """Continuously process the links from the source collection."""
         times_waited = 0
         reset_count = 5
-        wait_time = 2  # seconds
+        wait_time = 2  # seconds, 5*2 makes 10 seconds of wait before reset
+        destination = None
         while True:
             doc = self.src_collection.find_one_and_delete({})
             if doc:
                 if 'url' in doc:
                     try:
-                        self.process(url=doc['url'] + ".json", target_collection=doc['destination_collection'])
-                        self.post_number += 1
-                        logging.info(f"Processed page with json: {doc['url']}")
+                        destination = doc['destination_collection']
+                        self.process(url=doc['url'] + ".json", target_collection=destination)
+                        
+                        times_waited = 0  # Reset wait count after processing a document
+                        logging.info(f"Processed page with url: {doc['url']}")
                     except Exception as e:
-                        logging.error(f"Process error for {doc['url']}: {e}")
+                        logging.error(f"Process error for url: {doc['url']}: {e}")
             else:
                 time.sleep(wait_time)  # Wait before checking for new docs
                 times_waited += 1
                 logging.info(f"No new documents found. Waited {times_waited} times.")
-                if times_waited % reset_count == 0:
-                    logging.info("No new documents found. Resetting post_number...")
-                    self.post_number = 1  # Reset post number after processing all documents
+                if ((times_waited % reset_count == 0) and destination):
+                    self.update_number(destination) # Set the numbers for destination
+                    logging.info("No new documents found. Setting numbers and resetting wait count.")
                     times_waited = 1 # Reset the wait count after reset
