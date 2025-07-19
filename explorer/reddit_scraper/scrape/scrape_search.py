@@ -25,8 +25,12 @@ def scrape_search(session, query, num_links_to_find):
         logging.info("Search results loaded.")
     except TimeoutException:
         logging.error("Timeout waiting for search results.")
+        
+        """The following code captures the current state of 
+        the page and saves it within docker, useful when we
+        get detected as a bot and it's time to reset/change
+        VPNs."""
         # --- START DIAGNOSTIC CAPTURE ---
-        """The following code captures the current state of the page and saves it within docker for debugging purposes."""
         timestamp = int(time.time()) # To make filenames unique
         screenshot_path = f"/app/debug_screenshot_search_timeout_{timestamp}.png"
         page_source_path = f"/app/debug_page_source_search_timeout_{timestamp}.html"

@@ -84,7 +84,8 @@ class ProcessSession:
         except Exception as e:
             logging.error(f"Error processing JSON content: {e}")
     
-    def update_number(self, collection_name):
+    def update_number(self, collection_name): # Huge help from AI
+        """Update the 'number' field in the specified collection."""
         collection = self.database[collection_name]
         total = collection.count_documents({})
 

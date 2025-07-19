@@ -23,7 +23,7 @@ def scrape_site(session, req_address, total_links_to_scrape=None, coming_from_se
             return False
 
     session.collection = session.database["tmp_links"]
-    # Save the html
+    # Save the json address to the database
     doc = {
         "url": req_address,
         "total_links_to_scrape": total_links_to_scrape,

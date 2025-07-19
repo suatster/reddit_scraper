@@ -25,8 +25,11 @@ args = parser.parse_args()
 def cli_mode():
     reddit_scraper.start()
     if args.search:
+        if not args.search or args.num <= 0:
+            logging.error("Invalid input. Please enter a valid search term and a positive number of results.")
+            return
         logging.info(f"Running scraper with search term: {args.search} and number of results: {args.num}")
-        if args.num == 10 and not any(arg in ['-n', '--num'] for arg in sys.argv):
+        if args.num == 10 and not any(arg in ['-n', '--num'] for arg in sys.argv): # Make sure the user didn't specify the number 10
             logging.warning("Using default number of results: 10. Use -n or --num to specify a different number.")
         if not scrape_search.scrape_search(reddit_scraper.session, args.search, args.num):
             logging.error("Failed to scrape search results.")
@@ -61,7 +64,9 @@ def ui_mode():
             try:
                 query = input("Please enter the search query: ")
                 num_links = int(input("Number of links to find (e.g., 10): "))
-                
+                if not query or num_links <= 0:
+                    logging.error("Invalid input. Please enter a valid query and a positive number of links.")
+                    return
                 if not scrape_search.scrape_search(reddit_scraper.session, query, num_links):
                     logging.error("Failed to scrape search results.")
 
