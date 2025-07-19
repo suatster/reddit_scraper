@@ -2,6 +2,7 @@
 
 Welcome to my Reddit Scraper!  
 _(It’s not the best, **YET**.)_
+_(also, please make sure you have a good internet connection)_
 
 This is a simple project with three Docker containers: **MongoDB**, **Explorer**, and **Processor**.  
 Explorer finds the links needed, and Processor pulls the `.json` versions.  
